@@ -17,7 +17,6 @@ $(".startButton").hover(function() {
 
 $(".startButton").on("click", function() {
  	start = true;
- 	alert("Let the games begin!");
 
  	if ((start = true)) {
  	$(".startButton").hide();
@@ -26,17 +25,24 @@ $(".startButton").on("click", function() {
  	hoverHighlight();
  	gameOfTrivia();
  	answerSelect();
- 	intervalId = setInterval(countdown, 1000);
 	countdown();
  }
 });
 
 function answerSelect() {
 	$(document).on("click", "[data-status=false]", function() {
+	$("[data-status=true]").unbind("mouseenter");
+	$("[data-status=false]").unbind("mouseenter");
+	$(this).css("background-color", "#333");
+	$(this).css("color", "white");
 	incorrectAnswer();
 	});
 
 	$(document).on("click", "[data-status=true]", function() {
+	$("[data-status=true]").unbind("mouseenter");
+	$("[data-status=false]").unbind("mouseenter");
+	$(this).css("background-color", "#333");
+	$(this).css("color", "white");
 	correctAnswer();
 	});
 
@@ -46,10 +52,9 @@ function answerSelect() {
 	incorrect = 0;
 	unanswered = 0;
 	time = 30;
-	alert("Let the games begin!");
+	
 	question++;
 	gameOfTrivia();
-	intervalId = setInterval(countdown, 1000);
 	countdown();
 	});
 }
@@ -58,18 +63,13 @@ function countdown() {
 	time--;
     $(".timer").html("Time Left: " + time);
     if (time === 0) {
-        alert("Time Up!");
         clearInterval(intervalId);
-        question++;
-        unanswered++;
-        time = 30;
-        intervalId = setInterval(countdown, 1000);
-		countdown();
-		gameOfTrivia();
+        noAnswer();
       }
   }
 
 function gameOfTrivia() {
+	intervalId = setInterval(countdown, 1000);
 	if (question === 1) {
 		question1();
 	}
@@ -105,20 +105,73 @@ function gameOfTrivia() {
 	}
 }
 
+function resultOfTrivia() {
+	if (question === 1) {
+		result1();
+	}
+	else if (question === 2) {
+		result2();
+	}
+	else if (question === 3) {
+		result3();
+	}
+	else if (question === 4) {
+		result4();
+	}
+	else if (question === 5) {
+		result5();
+	}
+	else if (question === 6) {
+		result6();
+	}
+	else if (question === 7) {
+		result7();
+	}
+	else if (question === 8) {
+		result8();
+	}
+	else if (question === 9) {
+		result9();
+	}
+	else if (question === 10) {
+		result10();
+	}
+}
+
 function correctAnswer() {
-	alert("Correct!");
+	clearInterval(intervalId);
+	resultOfTrivia();
+	$(".answer1").html("Correct!");
   	question++;
   	correct++;
-  	time = 30;
-	gameOfTrivia();
+	setTimeout(countdown, 1000 * 6);
+	setTimeout(gameOfTrivia, 1000 * 6);
+	setTimeout(hoverHighlight, 1000 * 6)
+	time = 30;
 }
 
 function incorrectAnswer() {
-	alert("Wrong!")
+	clearInterval(intervalId);
+	resultOfTrivia();
+	$(".answer1").html("Incorrect!");
   	question++;
   	incorrect++;
-  	time = 30;
-	gameOfTrivia();
+	setTimeout(countdown, 1000 * 6);
+	setTimeout(gameOfTrivia, 1000 * 6);
+	setTimeout(hoverHighlight, 1000 * 6)
+	time = 30;
+}
+
+function noAnswer() {
+	clearInterval(intervalId);
+	resultOfTrivia();
+	$(".answer1").html("Time's up!");
+  	question++;
+  	incorrect++;
+	setTimeout(countdown, 1000 * 6);
+	setTimeout(gameOfTrivia, 1000 * 6);
+	setTimeout(hoverHighlight, 1000 * 6)
+	time = 30;
 }
 
 function question1() {
@@ -134,6 +187,17 @@ function question1() {
 	$(".answer4").attr("data-status", "false");
 	}
 
+function result1() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer - A: Jon Arryn");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/jon-arryn.png' height='300px' width='300px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
+
 function question2() {
 	$(".timer").html("Time Left: " + time);
 	$(".questions").html("2: How did Robert Baratheon's rule come to an end?");
@@ -146,6 +210,17 @@ function question2() {
 	$(".answer4").html("D: He was fatally injured during a boar hunt.");
 	$(".answer4").attr("data-status", "true");
 	}
+
+function result2() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer - D: He was fatally injured during a boar hunt.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/baratheon.gif' height='250px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question3() {
 	$(".timer").html("Time Left: " + time);
@@ -160,6 +235,17 @@ function question3() {
 	$(".answer4").attr("data-status", "false");
 	}
 
+function result3() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer - C: His oldest son, Joffrey Baratheon.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/joffrey.gif' height='300px' width='300px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
+
 function question4() {
 	$(".timer").html("Time Left: " + time);
 	$(".questions").html("4: Why did Jon Snow 'take the black' and join the Night's Watch?");
@@ -171,7 +257,18 @@ function question4() {
 	$(".answer3").attr("data-status", "false");
 	$(".answer4").html("D: He heard legend of treasures beyond the Wall and joined the Night's Watch to pursue them.");
 	$(".answer4").attr("data-status", "false");
-	}
+}
+
+function result4() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer - B: He was inspired by his uncle who volunteered for the Night's Watch.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/benjen.gif' height='250px' width='300px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question5() {
 	$(".timer").html("Time Left: " + time);
@@ -254,10 +351,10 @@ function question10() {
 function gameOver() {
 	clearInterval(intervalId);
 	$(".timer").html("");
-	$(".questions").html("Game over!<br>Thanks for playing and check your results below!");
+	$(".questions").html("Game over!<br>Thanks for playing! Check your results below!");
 	$(".answer1").html("Correct answers: " + correct);
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Incorrect answers " + incorrect);
+	$(".answer2").html("Incorrect answers: " + incorrect);
 	$(".answer2").attr("data-status", "none");
 	$(".answer3").html("Unaswered: " + unanswered);
 	$(".answer3").attr("data-status", "none");
@@ -268,34 +365,38 @@ function gameOver() {
 function hoverHighlight () {
 	$(".answer1").hover(function() {
 	  $(this).css("background-color", "gray");
-	  $(this).css("color", "white");
+	  $(this).css("color", "gold");
 		}, 
 		function() {
 	  		$(this).css("background-color", "#333");
-	  		$(this).css("color", "gold");
+	  		$(this).css("color", "white");
 		});
 	$(".answer2").hover(function() {
 	  $(this).css("background-color", "gray");
-	  $(this).css("color", "white");
+	  $(this).css("color", "gold");
 		}, 
 		function() {
 	  		$(this).css("background-color", "#333");
-	  		$(this).css("color", "gold");
+	  		$(this).css("color", "white");
 		});
 	$(".answer3").hover(function() {
 	  $(this).css("background-color", "gray");
-	  $(this).css("color", "white");
+	  $(this).css("color", "gold");
 		}, 
 		function() {
 	  		$(this).css("background-color", "#333");
-	  		$(this).css("color", "gold");
+	  		$(this).css("color", "white");
 		});
 	$(".answer4").hover(function() {
 	  $(this).css("background-color", "gray");
-	  $(this).css("color", "white");
+	  $(this).css("color", "gold");
 		}, 
 		function() {
 	  		$(this).css("background-color", "#333");
-	  		$(this).css("color", "gold");
+	  		$(this).css("color", "white");
 		});
+}
+
+function backgroundCycle () {
+	
 }
