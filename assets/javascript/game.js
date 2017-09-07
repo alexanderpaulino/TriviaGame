@@ -1,3 +1,7 @@
+//Listing all relevant variables. After speaking with the instructor and TAs, it became clear I should
+//have utilized objects and properties to store my questions and answers to cut this code down in half. I'll 
+//have to create a second repository to experiment with that.
+
 var question = 0;
 var correct = 0;
 var incorrect = 0;
@@ -5,6 +9,8 @@ var unanswered = 0;
 var time = 0;
 var start = false;
 var IntervalId;
+
+//Start button with appropriate hover styling.
 
 $(".startButton").hover(function() {
   $(this).css("background-color", "black");
@@ -14,6 +20,9 @@ $(".startButton").hover(function() {
   		$(this).css("background-color", "gray");
   		$(this).css("color", "gold");
 });
+
+//Start button click function, starting the game and calling all necessary functions. Hiding the start button so
+//it won't get in the way of the answers.
 
 $(".startButton").on("click", function() {
  	start = true;
@@ -28,6 +37,10 @@ $(".startButton").on("click", function() {
 	countdown();
  }
 });
+
+//The onclick function that disables the hover styling for the results page and triggers the incorrect or correct answer
+//function that updates the relevant variables. Additionally, the startOver function is called when a button with the
+//startover data-attribute is clicked.
 
 function answerSelect() {
 	$(document).on("click", "[data-status=false]", function() {
@@ -47,17 +60,12 @@ function answerSelect() {
 	});
 
 	$(document).on("click", "[data-status=startover]", function() {
-	question = 0;
-	correct = 0;
-	incorrect = 0;
-	unanswered = 0;
-	time = 30;
-	
-	question++;
-	gameOfTrivia();
-	countdown();
+	startOver();
 	});
 }
+
+//Simple countdown function which manages the clock. In the event that time expires, the clock is stopped and the 
+//noAnswer function is called.
 
 function countdown() {
 	time--;
@@ -67,6 +75,9 @@ function countdown() {
         noAnswer();
       }
   }
+
+//The primary game function. This checks to see which question the game is at and calls the relevant function to
+//update the game box with the proper questions and answers.
 
 function gameOfTrivia() {
 	intervalId = setInterval(countdown, 1000);
@@ -101,9 +112,15 @@ function gameOfTrivia() {
 		question10();
 	}
 	else {
+		$("[data-status=true]").unbind("mouseenter");
+		$("[data-status=false]").unbind("mouseenter");
 		gameOver();
 	}
 }
+
+//The primary result function to be run after every question is answered (correctly or incorrectly) or time expires.
+//Similar to gameOfTrivia, this calls on the relevant function that updates the gamebox with the answer registered,
+//the correct answer to the question, and a relevant gif or image.
 
 function resultOfTrivia() {
 	if (question === 1) {
@@ -138,17 +155,23 @@ function resultOfTrivia() {
 	}
 }
 
+//This function stops the clock, calls the resultOfTrivia function to update the gamebox with the result page, and increments
+//the question and correct variables. Through use of setTimeout, the user is allowed five seconds to read the result and view
+//a brief gif related to the question before the clock is reset and the game continues.
+
 function correctAnswer() {
 	clearInterval(intervalId);
 	resultOfTrivia();
 	$(".answer1").html("Correct!");
   	question++;
   	correct++;
-	setTimeout(countdown, 1000 * 6);
-	setTimeout(gameOfTrivia, 1000 * 6);
-	setTimeout(hoverHighlight, 1000 * 6)
+	setTimeout(countdown, 1000 * 5);
+	setTimeout(gameOfTrivia, 1000 * 5);
+	setTimeout(hoverHighlight, 1000 * 5);
 	time = 30;
 }
+
+//Same as above, but with incorrect variable increment and on-screen message.
 
 function incorrectAnswer() {
 	clearInterval(intervalId);
@@ -156,23 +179,44 @@ function incorrectAnswer() {
 	$(".answer1").html("Incorrect!");
   	question++;
   	incorrect++;
-	setTimeout(countdown, 1000 * 6);
-	setTimeout(gameOfTrivia, 1000 * 6);
-	setTimeout(hoverHighlight, 1000 * 6)
+	setTimeout(countdown, 1000 * 5);
+	setTimeout(gameOfTrivia, 1000 * 5);
+	setTimeout(hoverHighlight, 1000 * 5);
 	time = 30;
 }
+
+//Same as above, but with unanswered variable increment and on-screen message.
 
 function noAnswer() {
 	clearInterval(intervalId);
 	resultOfTrivia();
 	$(".answer1").html("Time's up!");
   	question++;
-  	incorrect++;
-	setTimeout(countdown, 1000 * 6);
-	setTimeout(gameOfTrivia, 1000 * 6);
-	setTimeout(hoverHighlight, 1000 * 6)
+  	unanswered++;
+	setTimeout(countdown, 1000 * 5);
+	setTimeout(gameOfTrivia, 1000 * 5);
+	setTimeout(hoverHighlight, 1000 * 5);
 	time = 30;
 }
+
+function startOver () {
+	question = 0;
+	correct = 0;
+	incorrect = 0;
+	unanswered = 0;
+	time = 30;
+	
+	question++;
+	gameOfTrivia();
+	hoverHighlight();
+	countdown();
+}
+
+//Each question and result function, when called, updates the window based on the user's progress through the trivia game.
+//Each answer div has a data attribute and value applied to it that determines what functions are called and which variables 
+//are changed once they've been clicked. For the result screen between questions, clicking on the answer boxes won't trigger 
+//a response because they've been given an unresponsive data-attribute value. Different values are applied during each 
+//function to maintain functionality.
 
 function question1() {
 	$(".timer").html("Time Left: " + time);
@@ -190,9 +234,9 @@ function question1() {
 function result1() {
 	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer - A: Jon Arryn");
+	$(".answer2").html("Correct Answer: A<br>Jon Arryn");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/jon-arryn.png' height='300px' width='300px'>");
+	$(".answer3").html("<img src='assets/images/jon-arryn.png' height='250px' width='275px'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -214,7 +258,7 @@ function question2() {
 function result2() {
 	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer - D: He was fatally injured during a boar hunt.");
+	$(".answer2").html("Correct Answer: D<br>He was fatally injured during a boar hunt.");
 	$(".answer2").attr("data-status", "none");
 	$(".answer3").html("<img src='assets/images/baratheon.gif' height='250px' width='350px'>");
 	$(".answer3").attr("data-status", "none");
@@ -238,7 +282,7 @@ function question3() {
 function result3() {
 	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer - C: His oldest son, Joffrey Baratheon.");
+	$(".answer2").html("Correct Answer: C<br>His oldest son, Joffrey Baratheon.");
 	$(".answer2").attr("data-status", "none");
 	$(".answer3").html("<img src='assets/images/joffrey.gif' height='300px' width='300px'>");
 	$(".answer3").attr("data-status", "none");
@@ -262,7 +306,7 @@ function question4() {
 function result4() {
 	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer - B: He was inspired by his uncle who volunteered for the Night's Watch.");
+	$(".answer2").html("Correct Answer: B<br>He was inspired by his uncle who volunteered for the Night's Watch.");
 	$(".answer2").attr("data-status", "none");
 	$(".answer3").html("<img src='assets/images/benjen.gif' height='250px' width='300px'>");
 	$(".answer3").attr("data-status", "none");
@@ -281,7 +325,18 @@ function question5() {
 	$(".answer3").attr("data-status", "false");
 	$(".answer4").html("D: Eddard Stark, Head of House Stark and Arya's father.");
 	$(".answer4").attr("data-status", "false");
-	}
+}
+
+function result5() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer: A<br>Syrio Forel, Braavosi swordmaster.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/syrioforel.gif' height='300px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question6() {
 	$(".timer").html("Time Left: " + time);
@@ -294,7 +349,18 @@ function question6() {
 	$(".answer3").attr("data-status", "true");
 	$(".answer4").html("D: After suffering a light wound, his injury became infected and they were forced to amputate.");
 	$(".answer4").attr("data-status", "false");
-	}
+}
+
+function result6() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer: C<br>He was pushed off of the highest tower in Winterfell after witnessing a salacious act.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/branfalls.gif' height='300px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question7() {
 	$(".timer").html("Time Left: " + time);
@@ -307,7 +373,18 @@ function question7() {
 	$(".answer3").attr("data-status", "false");
 	$(".answer4").html("D: In an open plain.");
 	$(".answer4").attr("data-status", "true");
-	}
+}
+
+function result7() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer: D<br>In an open plain.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/dothrakicharge.gif' height='300px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question8() {
 	$(".timer").html("Time Left: " + time);
@@ -320,7 +397,18 @@ function question8() {
 	$(".answer3").attr("data-status", "false");
 	$(".answer4").html("D: Rhaego, the Stallion Who Mounts the World");
 	$(".answer4").attr("data-status", "false");
-	}
+}
+
+function result8() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer: A<br>Azor Ahai.");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/azorahai.jpg' height='300px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question9() {
 	$(".timer").html("Time Left: " + time);
@@ -333,7 +421,18 @@ function question9() {
 	$(".answer3").attr("data-status", "false");
 	$(".answer4").html("D: Rhaegal");
 	$(".answer4").attr("data-status", "false");
-	}
+}
+
+function result9() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer: B<br>Aegon");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/3dragons.gif' height='300px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
 
 function question10() {
 	$(".timer").html("Time Left: " + time);
@@ -346,21 +445,39 @@ function question10() {
 	$(".answer3").attr("data-status", "false");
 	$(".answer4").html("D: Ser Fuzzybottom");
 	$(".answer4").attr("data-status", "false");
-	}
+}
+
+function result10() {
+	$(".timer").html("");
+	$(".answer1").attr("data-status", "none");
+	$(".answer2").html("Correct Answer: A<br>Ser Pounce");
+	$(".answer2").attr("data-status", "none");
+	$(".answer3").html("<img src='assets/images/serpounce.gif' height='300px' width='350px'>");
+	$(".answer3").attr("data-status", "none");
+	$(".answer4").html("");
+	$(".answer4").attr("data-status", "none");
+}
+
+//This function stops the clock and presents the final screen, tallying the user's score based on their correct, incorrect,
+//and unanswered questions. The last button allows the user to restart the game, resetting the game variables and prompting
+//the user with the first question again.
 
 function gameOver() {
 	clearInterval(intervalId);
 	$(".timer").html("");
-	$(".questions").html("Game over!<br>Thanks for playing! Check your results below!");
+	$(".questions").html("<h2>GAME OVER</h2><br><h3>Thanks for playing! Check your results below!</h3>");
 	$(".answer1").html("Correct answers: " + correct);
 	$(".answer1").attr("data-status", "none");
 	$(".answer2").html("Incorrect answers: " + incorrect);
 	$(".answer2").attr("data-status", "none");
 	$(".answer3").html("Unaswered: " + unanswered);
 	$(".answer3").attr("data-status", "none");
-	$(".answer4").html("<h2>Start Over?</h2>");
+	$(".answer4").html("<h2>Click here to try again!</h2>");
 	$(".answer4").attr("data-status", "startover");
 }
+
+//This allows the users to see which answer they're clicking on beforehand through a simple style modification. I considered
+//adding a box outline to make it appear more button-like, but felt there was enough code as is...
 
 function hoverHighlight () {
 	$(".answer1").hover(function() {
@@ -395,8 +512,4 @@ function hoverHighlight () {
 	  		$(this).css("background-color", "#333");
 	  		$(this).css("color", "white");
 		});
-}
-
-function backgroundCycle () {
-	
 }
