@@ -60,6 +60,8 @@ function answerSelect() {
 	});
 
 	$(document).on("click", "[data-status=startover]", function() {
+	$(this).css("background-color", "#333");
+	$(this).css("color", "white");
 	startOver();
 	});
 }
@@ -112,8 +114,6 @@ function gameOfTrivia() {
 		question10();
 	}
 	else {
-		$("[data-status=true]").unbind("mouseenter");
-		$("[data-status=false]").unbind("mouseenter");
 		gameOver();
 	}
 }
@@ -188,6 +188,8 @@ function incorrectAnswer() {
 //Same as above, but with unanswered variable increment and on-screen message.
 
 function noAnswer() {
+	$("[data-status=true]").unbind("mouseenter");
+	$("[data-status=false]").unbind("mouseenter");
 	clearInterval(intervalId);
 	resultOfTrivia();
 	$(".answer1").html("Time's up!");
