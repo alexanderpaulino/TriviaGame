@@ -6,7 +6,10 @@ body, html {
 
 html {
 	background-image: url(../images/mainbackground.jpg);
-	background-size: cover;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: black;
 }
 
 h2 {
@@ -26,8 +29,8 @@ hr {
 
 .gameBox {
 	position: relative;
-	margin: 12% 10% 12% 10%;
-	min-height: 600px;
+	margin: 10%;
+	height: 750px;
 	border-style: solid;
 	border-color: black;
 	border-width: 4px;
@@ -48,7 +51,7 @@ hr {
 	border-style: solid;
 	margin: 0 auto;
 	margin-bottom: 9%;
-	min-height: 400px;
+	height: 550px;
 	color: gold;
 }
 
@@ -61,7 +64,7 @@ hr {
 
 .answer1, .answer2, .answer3, .answer4 {
 	margin: 0 auto;
-	width: 60%;
+	width: 90%;
 	font-size: 25px;
 	font-weight: normal;
 	padding: 15px 0px 15px 0px;
@@ -79,4 +82,96 @@ hr {
 	border-style: solid;
 	border-width: 2px;
 	border-color: black;
+}
+
+@media screen and (max-width: 980px) {
+	
+	.answer1, .answer2, .answer3, .answer4 {
+	width: 80%;
+	font-size: 20px;
+	padding: 10px 0px 10px 0px;
+	}
+
+	.questions {
+	width: 90%;
+	font-size: 22px;
+	padding: 22px 0px 22px 0px;
+	}
+
+	h2 {
+	font-size: 30px;
+	}
+
+	.timer {
+	font-size: 25px;
+	}
+
+	.title {
+	font-size: 36px;
+	padding: 15px 15px 0px 15px;
+	}
+
+	.startButton {
+	font-size: 30px;
+	padding: 10px 0px 10px 0px;
+	border-width: 1px;
+	}
+
+	.gameBox {
+	margin: 12% 8% 12% 8%;
+	height: 625px;
+	border-width: 3px;
+	}
+
+	.innerGameBox {
+	width: 90%;
+	margin-bottom: 5%;
+	height: 465px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	
+	.answer1, .answer2, .answer3, .answer4 {
+	width: 90%;
+	font-size: 16px;
+	padding: 10px 0px 10px 0px;
+	}
+
+	.questions {
+	width: 95%;
+	font-size: 18px;
+	padding: 10px 0px 10px 0px;
+	}
+
+	h2 {
+	font-size: 25px;
+	}
+
+	.timer {
+	font-size: 20px;
+	padding: 8px;
+	}
+
+	.title {
+	font-size: 28px;
+	padding: 10px 10px 0px 10px;
+	}
+
+	.startButton {
+	font-size: 25px;
+	padding: 10px 0px 10px 0px;
+	}
+
+	.gameBox {
+	margin: 12% 6% 12% 6%;
+	height: 535px;
+	border-width: 3px;
+	}
+
+	.innerGameBox {
+	width: 90%;
+	margin-bottom: 4%;
+	height: 410px;
+	}
 }

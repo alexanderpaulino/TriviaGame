@@ -30,7 +30,7 @@ $(".startButton").on("click", function() {
  	if ((start = true)) {
  	$(".startButton").hide();
  	question++;
- 	time = 30;
+ 	time = 31;
  	hoverHighlight();
  	gameOfTrivia();
  	answerSelect();
@@ -168,7 +168,7 @@ function correctAnswer() {
 	setTimeout(countdown, 1000 * 5);
 	setTimeout(gameOfTrivia, 1000 * 5);
 	setTimeout(hoverHighlight, 1000 * 5);
-	time = 30;
+	time = 31;
 }
 
 //Same as above, but with incorrect variable increment and on-screen message.
@@ -182,7 +182,7 @@ function incorrectAnswer() {
 	setTimeout(countdown, 1000 * 5);
 	setTimeout(gameOfTrivia, 1000 * 5);
 	setTimeout(hoverHighlight, 1000 * 5);
-	time = 30;
+	time = 31;
 }
 
 //Same as above, but with unanswered variable increment and on-screen message.
@@ -196,7 +196,7 @@ function noAnswer() {
 	setTimeout(countdown, 1000 * 5);
 	setTimeout(gameOfTrivia, 1000 * 5);
 	setTimeout(hoverHighlight, 1000 * 5);
-	time = 30;
+	time = 31;
 }
 
 function startOver () {
@@ -204,7 +204,7 @@ function startOver () {
 	correct = 0;
 	incorrect = 0;
 	unanswered = 0;
-	time = 30;
+	time = 31;
 	
 	question++;
 	gameOfTrivia();
@@ -227,16 +227,15 @@ function question1() {
 	$(".answer2").attr("data-status", "false");
 	$(".answer3").html("C: Davos Seaworth");
 	$(".answer3").attr("data-status", "false");
-	$(".answer4").html("D: There was no Hand of<br>the King before Ned Stark");
+	$(".answer4").html("D: There was no Hand of the King before Ned Stark");
 	$(".answer4").attr("data-status", "false");
 	}
 
 function result1() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: A<br>Jon Arryn");
+	$(".answer2").html("Correct Answer: A<br><br>Jon Arryn");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/jon-arryn.png' height='250px' width='275px'>");
+	$(".answer3").html("<img src='assets/images/jon-arryn.png' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -256,11 +255,10 @@ function question2() {
 	}
 
 function result2() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: D<br>He was fatally injured during a boar hunt.");
+	$(".answer2").html("Correct Answer: D<br><br>He was fatally injured during a boar hunt.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/baratheon.gif' height='250px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/baratheon.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -280,11 +278,10 @@ function question3() {
 	}
 
 function result3() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: C<br>His oldest son, Joffrey Baratheon.");
+	$(".answer2").html("Correct Answer: C<br><br>His oldest son, Joffrey Baratheon.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/joffrey.gif' height='300px' width='300px'>");
+	$(".answer3").html("<img src='assets/images/joffrey.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -292,7 +289,7 @@ function result3() {
 
 function question4() {
 	$(".timer").html("Time Left: " + time);
-	$(".questions").html("4: Why did Jon Snow 'take the black' and join the Night's Watch?");
+	$(".questions").html("4: Why did Jon Snow join the Night's Watch?");
 	$(".answer1").html("A: As a bastard, he had no claims to family and had no choice once he reached adulthood.");
 	$(".answer1").attr("data-status", "false");
 	$(".answer2").html("B: He was inspired by his uncle who volunteered for the Night's Watch.");
@@ -304,11 +301,10 @@ function question4() {
 }
 
 function result4() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: B<br>He was inspired by his uncle who volunteered for the Night's Watch.");
+	$(".answer2").html("Correct Answer: B<br><br>He was inspired by his uncle who volunteered for the Night's Watch.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/benjen.gif' height='250px' width='300px'>");
+	$(".answer3").html("<img src='assets/images/benjen.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -328,11 +324,10 @@ function question5() {
 }
 
 function result5() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: A<br>Syrio Forel, Braavosi swordmaster.");
+	$(".answer2").html("Correct Answer: A<br><br>Syrio Forel, Braavosi swordmaster.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/syrioforel.gif' height='300px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/syrioforel.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -345,18 +340,17 @@ function question6() {
 	$(".answer1").attr("data-status", "false");
 	$(".answer2").html("B: He was tortured after being captured by enemies of the Starks.");
 	$(".answer2").attr("data-status", "false");
-	$(".answer3").html("C: He was pushed off of the highest tower in Winterfell after witnessing a salacious act.");
+	$(".answer3").html("C: He was pushed off of the highest tower in Winterfell.");
 	$(".answer3").attr("data-status", "true");
 	$(".answer4").html("D: After suffering a light wound, his injury became infected and they were forced to amputate.");
 	$(".answer4").attr("data-status", "false");
 }
 
 function result6() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: C<br>He was pushed off of the highest tower in Winterfell after witnessing a salacious act.");
+	$(".answer2").html("Correct Answer: C<br><br>He was pushed off of the highest tower in Winterfell.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/branfalls.gif' height='300px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/branfalls.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -376,11 +370,10 @@ function question7() {
 }
 
 function result7() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: D<br>In an open plain.");
+	$(".answer2").html("Correct Answer: D<br><br>In an open plain.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/dothrakicharge.gif' height='300px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/dothrakicharge.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -388,7 +381,7 @@ function result7() {
 
 function question8() {
 	$(".timer").html("Time Left: " + time);
-	$(".questions").html("8: What was the name of the legendary figure who inspired the prophecy of the Prince That Was Promised?");
+	$(".questions").html("8: What was the name of the man who inspired the prophecy of the Prince That Was Promised?");
 	$(".answer1").html("A: Azor Ahai");
 	$(".answer1").attr("data-status", "true");
 	$(".answer2").html("B: Joramun, King Beyond the Wall");
@@ -400,11 +393,10 @@ function question8() {
 }
 
 function result8() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: A<br>Azor Ahai.");
+	$(".answer2").html("Correct Answer: A<br><br>Azor Ahai.");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/azorahai.jpg' height='300px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/azorahai.jpg' style='max-height: 200px; max-width: 275px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -424,11 +416,10 @@ function question9() {
 }
 
 function result9() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: B<br>Aegon");
+	$(".answer2").html("Correct Answer: B<br><br>Aegon");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/3dragons.gif' height='300px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/3dragons.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
@@ -448,11 +439,10 @@ function question10() {
 }
 
 function result10() {
-	$(".timer").html("");
 	$(".answer1").attr("data-status", "none");
-	$(".answer2").html("Correct Answer: A<br>Ser Pounce");
+	$(".answer2").html("Correct Answer: A<br><br>Ser Pounce");
 	$(".answer2").attr("data-status", "none");
-	$(".answer3").html("<img src='assets/images/serpounce.gif' height='300px' width='350px'>");
+	$(".answer3").html("<img src='assets/images/serpounce.gif' style='max-height: 200px; max-width: 300px;'>");
 	$(".answer3").attr("data-status", "none");
 	$(".answer4").html("");
 	$(".answer4").attr("data-status", "none");
