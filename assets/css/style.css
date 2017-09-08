@@ -175,3 +175,25 @@ hr {
 	height: 410px;
 	}
 }
+
+@media screen and (max-width: 480px) {
+	
+	html {
+		background-position: top;
+	}
+
+	.gameBox {
+	height: 560px;
+	border-width: 2px;
+	}
+
+	.innerGameBox {
+	width: 95%;
+	margin-bottom: 2%;
+	height: 420px;
+	}	
+
+	.answer1, .answer2, .answer3, .answer4 {
+	width: 98%;
+	}
+}
